@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Sistema de Dicas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div style="padding: 50px; text-align: center;">
+        <h1>Teste do Sistema de Dicas</h1>
+        <button onclick="testarDica()" style="padding: 20px; font-size: 18px; background: #4ECDC4; color: white; border: none; border-radius: 10px; cursor: pointer;">
+            Clique para Testar Dica
+        </button>
+    </div>
+
+    <!-- Sistema de Dicas -->
+    <div id="hint-container" class="hint-container hidden">
+        <div class="hint-character">
+            <img src="exemplo_dica.png" alt="Personagem dando dica" class="hint-image">
+        </div>
+        <div class="hint-speech-bubble">
+            <p id="hint-text" class="hint-text">Esta é uma dica de teste!</p>
+            <button id="close-hint" class="close-hint-btn">×</button>
+        </div>
+    </div>
+
+    <script>
+        function testarDica() {
+            const hintContainer = document.getElementById('hint-container');
+            const hintText = document.getElementById('hint-text');
+            
+            hintText.textContent = "Esta é uma dica de teste! O sistema está funcionando!";
+            
+            hintContainer.classList.remove('hidden');
+            hintContainer.classList.add('show');
+            
+            // Auto-hide após 5 segundos
+            setTimeout(() => {
+                hintContainer.classList.remove('show');
+                setTimeout(() => {
+                    hintContainer.classList.add('hidden');
+                }, 400);
+            }, 5000);
+        }
+
+        // Botão de fechar
+        document.getElementById('close-hint').addEventListener('click', () => {
+            const hintContainer = document.getElementById('hint-container');
+            hintContainer.classList.remove('show');
+            setTimeout(() => {
+                hintContainer.classList.add('hidden');
+            }, 400);
+        });
+
+        // Tecla ESC para fechar
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const hintContainer = document.getElementById('hint-container');
+                hintContainer.classList.remove('show');
+                setTimeout(() => {
+                    hintContainer.classList.add('hidden');
+                }, 400);
+            }
+        });
+    </script>
+</body>
+</html>
